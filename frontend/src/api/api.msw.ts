@@ -30,17 +30,29 @@ export const getApiDjRestAuthUserUpdateMock = () => ({pk: faker.datatype.number(
 
 export const getApiDjRestAuthUserPartialUpdateMock = () => ({pk: faker.datatype.number({min: undefined, max: undefined}), username: faker.random.word(), email: faker.internet.email(), first_name: faker.random.word(), last_name: faker.random.word()})
 
+export const getApiEnergyLogsListMock = () => ({count: faker.helpers.arrayElement([faker.datatype.number({min: undefined, max: undefined}), undefined]), next: faker.helpers.arrayElement([faker.helpers.arrayElement([faker.internet.url(), null]), undefined]), previous: faker.helpers.arrayElement([faker.helpers.arrayElement([faker.internet.url(), null]), undefined]), results: faker.helpers.arrayElement([Array.from({ length: faker.datatype.number({ min: 1, max: 10 }) }, (_, i) => i + 1).map(() => ({id: faker.datatype.number({min: undefined, max: undefined}), created_at: `${faker.date.past().toISOString().split('.')[0]}Z`, updated_at: `${faker.date.past().toISOString().split('.')[0]}Z`, price: faker.random.word()})), undefined])})
+
 export const getApiSchemaRetrieveMock = () => (faker.helpers.arrayElement([{
-        'clmqi94900000u3y1ew3z8swl': {}
+        'clmqkztfb0000miy143ar68kr': {}
       }, {
-        'clmqi94900001u3y1hqqi2sqh': {}
+        'clmqkztfb0001miy1fh03auoh': {}
       }, {
-        'clmqi94900002u3y142p872s5': {}
+        'clmqkztfc0002miy11olcfhpj': {}
       }, {
-        'clmqi94900003u3y145bpgxhe': {}
+        'clmqkztfc0003miy1d9y6cu8e': {}
       }]))
 
-export const getApiUsersListMock = () => (Array.from({ length: faker.datatype.number({ min: 1, max: 10 }) }, (_, i) => i + 1).map(() => ({username: faker.random.word(), name: faker.helpers.arrayElement([faker.random.word(), undefined]), url: faker.internet.url()})))
+export const getApiUserCarsListMock = () => ({count: faker.helpers.arrayElement([faker.datatype.number({min: undefined, max: undefined}), undefined]), next: faker.helpers.arrayElement([faker.helpers.arrayElement([faker.internet.url(), null]), undefined]), previous: faker.helpers.arrayElement([faker.helpers.arrayElement([faker.internet.url(), null]), undefined]), results: faker.helpers.arrayElement([Array.from({ length: faker.datatype.number({ min: 1, max: 10 }) }, (_, i) => i + 1).map(() => ({id: faker.datatype.number({min: undefined, max: undefined}), created_at: `${faker.date.past().toISOString().split('.')[0]}Z`, updated_at: `${faker.date.past().toISOString().split('.')[0]}Z`, name: faker.random.word(), model: faker.random.word(), year: faker.datatype.number({min: -2147483648, max: 2147483647}), max_energy: faker.random.word(), current_energy: faker.random.word(), is_charging: faker.helpers.arrayElement([faker.datatype.boolean(), undefined]), is_active: faker.helpers.arrayElement([faker.datatype.boolean(), undefined]), owner: faker.datatype.number({min: undefined, max: undefined})})), undefined])})
+
+export const getApiUserCarsCreateMock = () => ({id: faker.datatype.number({min: undefined, max: undefined}), created_at: `${faker.date.past().toISOString().split('.')[0]}Z`, updated_at: `${faker.date.past().toISOString().split('.')[0]}Z`, name: faker.random.word(), model: faker.random.word(), year: faker.datatype.number({min: -2147483648, max: 2147483647}), max_energy: faker.random.word(), current_energy: faker.random.word(), is_charging: faker.helpers.arrayElement([faker.datatype.boolean(), undefined]), is_active: faker.helpers.arrayElement([faker.datatype.boolean(), undefined]), owner: faker.datatype.number({min: undefined, max: undefined})})
+
+export const getApiUserCarsRetrieveMock = () => ({id: faker.datatype.number({min: undefined, max: undefined}), created_at: `${faker.date.past().toISOString().split('.')[0]}Z`, updated_at: `${faker.date.past().toISOString().split('.')[0]}Z`, name: faker.random.word(), model: faker.random.word(), year: faker.datatype.number({min: -2147483648, max: 2147483647}), max_energy: faker.random.word(), current_energy: faker.random.word(), is_charging: faker.helpers.arrayElement([faker.datatype.boolean(), undefined]), is_active: faker.helpers.arrayElement([faker.datatype.boolean(), undefined]), owner: faker.datatype.number({min: undefined, max: undefined})})
+
+export const getApiUserCarsUpdateMock = () => ({id: faker.datatype.number({min: undefined, max: undefined}), created_at: `${faker.date.past().toISOString().split('.')[0]}Z`, updated_at: `${faker.date.past().toISOString().split('.')[0]}Z`, name: faker.random.word(), model: faker.random.word(), year: faker.datatype.number({min: -2147483648, max: 2147483647}), max_energy: faker.random.word(), current_energy: faker.random.word(), is_charging: faker.helpers.arrayElement([faker.datatype.boolean(), undefined]), is_active: faker.helpers.arrayElement([faker.datatype.boolean(), undefined]), owner: faker.datatype.number({min: undefined, max: undefined})})
+
+export const getApiUserCarsPartialUpdateMock = () => ({id: faker.datatype.number({min: undefined, max: undefined}), created_at: `${faker.date.past().toISOString().split('.')[0]}Z`, updated_at: `${faker.date.past().toISOString().split('.')[0]}Z`, name: faker.random.word(), model: faker.random.word(), year: faker.datatype.number({min: -2147483648, max: 2147483647}), max_energy: faker.random.word(), current_energy: faker.random.word(), is_charging: faker.helpers.arrayElement([faker.datatype.boolean(), undefined]), is_active: faker.helpers.arrayElement([faker.datatype.boolean(), undefined]), owner: faker.datatype.number({min: undefined, max: undefined})})
+
+export const getApiUsersListMock = () => ({count: faker.helpers.arrayElement([faker.datatype.number({min: undefined, max: undefined}), undefined]), next: faker.helpers.arrayElement([faker.helpers.arrayElement([faker.internet.url(), null]), undefined]), previous: faker.helpers.arrayElement([faker.helpers.arrayElement([faker.internet.url(), null]), undefined]), results: faker.helpers.arrayElement([Array.from({ length: faker.datatype.number({ min: 1, max: 10 }) }, (_, i) => i + 1).map(() => ({username: faker.random.word(), name: faker.helpers.arrayElement([faker.random.word(), undefined]), url: faker.internet.url()})), undefined])})
 
 export const getApiUsersRetrieveMock = () => ({username: faker.random.word(), name: faker.helpers.arrayElement([faker.random.word(), undefined]), url: faker.internet.url()})
 
@@ -105,11 +117,52 @@ ctx.json(getApiDjRestAuthUserUpdateMock()),
           ctx.status(200, 'Mocked status'),
 ctx.json(getApiDjRestAuthUserPartialUpdateMock()),
         )
+      }),rest.get('*/api/energy-logs/', (_req, res, ctx) => {
+        return res(
+          ctx.delay(1000),
+          ctx.status(200, 'Mocked status'),
+ctx.json(getApiEnergyLogsListMock()),
+        )
       }),rest.get('*/api/schema/', (_req, res, ctx) => {
         return res(
           ctx.delay(1000),
           ctx.status(200, 'Mocked status'),
 ctx.json(getApiSchemaRetrieveMock()),
+        )
+      }),rest.get('*/api/user-cars/', (_req, res, ctx) => {
+        return res(
+          ctx.delay(1000),
+          ctx.status(200, 'Mocked status'),
+ctx.json(getApiUserCarsListMock()),
+        )
+      }),rest.post('*/api/user-cars/', (_req, res, ctx) => {
+        return res(
+          ctx.delay(1000),
+          ctx.status(200, 'Mocked status'),
+ctx.json(getApiUserCarsCreateMock()),
+        )
+      }),rest.get('*/api/user-cars/:id/', (_req, res, ctx) => {
+        return res(
+          ctx.delay(1000),
+          ctx.status(200, 'Mocked status'),
+ctx.json(getApiUserCarsRetrieveMock()),
+        )
+      }),rest.put('*/api/user-cars/:id/', (_req, res, ctx) => {
+        return res(
+          ctx.delay(1000),
+          ctx.status(200, 'Mocked status'),
+ctx.json(getApiUserCarsUpdateMock()),
+        )
+      }),rest.patch('*/api/user-cars/:id/', (_req, res, ctx) => {
+        return res(
+          ctx.delay(1000),
+          ctx.status(200, 'Mocked status'),
+ctx.json(getApiUserCarsPartialUpdateMock()),
+        )
+      }),rest.delete('*/api/user-cars/:id/', (_req, res, ctx) => {
+        return res(
+          ctx.delay(1000),
+          ctx.status(200, 'Mocked status'),
         )
       }),rest.get('*/api/users/', (_req, res, ctx) => {
         return res(

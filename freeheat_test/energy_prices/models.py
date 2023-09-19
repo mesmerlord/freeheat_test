@@ -21,7 +21,6 @@ class UserCar(AbstractClient):
     class Meta:
         verbose_name = "User Car"
         verbose_name_plural = "User Cars"
-        db_table = "user_car"
         ordering = ["name"]
         unique_together = ("name", "model", "year", "owner")
 
@@ -30,7 +29,6 @@ class UserCarChargeLog(AbstractClient):
     user_car = models.ForeignKey(UserCar, on_delete=models.CASCADE, related_name="user_car_charge_logs")
     energy = models.DecimalField(max_digits=10, decimal_places=2)
     is_charging = models.BooleanField(default=False)
-    is_active = models.BooleanField(default=True)
 
     def __str__(self):
         return self.user_car.name
@@ -38,7 +36,6 @@ class UserCarChargeLog(AbstractClient):
     class Meta:
         verbose_name = "User Car Horuly Charge Log"
         verbose_name_plural = "User Car Charge Logs"
-        db_table = "user_car_charge_log"
         ordering = ["user_car"]
         unique_together = ("user_car", "energy", "is_charging")
 
@@ -52,6 +49,5 @@ class EnergyPriceLog(AbstractClient):
     class Meta:
         verbose_name = "Energy Price Log"
         verbose_name_plural = "Energy Price Logs"
-        db_table = "energy_price_log"
         ordering = ["price"]
         unique_together = ["price"]

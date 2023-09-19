@@ -30,11 +30,19 @@ import type {
   Registration,
   UserDetails,
   PatchedUserDetails,
+  PaginatedEnergyPriceLogModelList,
+  ApiEnergyLogsListParams,
   ApiSchemaRetrieve200One,
   ApiSchemaRetrieve200Two,
   ApiSchemaRetrieve200Three,
   ApiSchemaRetrieve200Four,
   ApiSchemaRetrieveParams,
+  PaginatedUserCarModelList,
+  ApiUserCarsListParams,
+  UserCarModel,
+  PatchedUserCarModel,
+  PaginatedUserList,
+  ApiUsersListParams,
   User,
   PatchedUser
 } from '.././model'
@@ -584,7 +592,85 @@ export const getApiDjRestAuthUserPartialUpdateMutationOptions = <TError = unknow
      
       return useMutation(mutationOptions);
     }
-    /**
+    export const apiEnergyLogsList = (
+    params?: ApiEnergyLogsListParams,
+ options?: SecondParameter<typeof axiosInstance>,signal?: AbortSignal
+) => {
+      return axiosInstance<PaginatedEnergyPriceLogModelList>(
+      {url: `/api/energy-logs/`, method: 'get',
+        params, signal
+    },
+      options);
+    }
+  
+
+export const getApiEnergyLogsListQueryKey = (params?: ApiEnergyLogsListParams,) => [`/api/energy-logs/`, ...(params ? [params]: [])] as const;
+  
+
+    
+export const getApiEnergyLogsListInfiniteQueryOptions = <TData = Awaited<ReturnType<typeof apiEnergyLogsList>>, TError = unknown>(params?: ApiEnergyLogsListParams, options?: { query?:UseInfiniteQueryOptions<Awaited<ReturnType<typeof apiEnergyLogsList>>, TError, TData>, request?: SecondParameter<typeof axiosInstance>}
+): UseInfiniteQueryOptions<Awaited<ReturnType<typeof apiEnergyLogsList>>, TError, TData> & { queryKey: QueryKey } => {
+const {query: queryOptions, request: requestOptions} = options ?? {};
+
+  const queryKey =  queryOptions?.queryKey ?? getApiEnergyLogsListQueryKey(params);
+
+  
+  
+    const queryFn: QueryFunction<Awaited<ReturnType<typeof apiEnergyLogsList>>> = ({ signal }) => apiEnergyLogsList(params, requestOptions, signal);
+    
+      
+      
+   return  { queryKey, queryFn,   staleTime: Infinity, refetchOnWindowFocus: false, retry: 1,  ...queryOptions}}
+
+export type ApiEnergyLogsListInfiniteQueryResult = NonNullable<Awaited<ReturnType<typeof apiEnergyLogsList>>>
+export type ApiEnergyLogsListInfiniteQueryError = unknown
+
+export const useApiEnergyLogsListInfinite = <TData = Awaited<ReturnType<typeof apiEnergyLogsList>>, TError = unknown>(
+ params?: ApiEnergyLogsListParams, options?: { query?:UseInfiniteQueryOptions<Awaited<ReturnType<typeof apiEnergyLogsList>>, TError, TData>, request?: SecondParameter<typeof axiosInstance>}
+
+  ):  UseInfiniteQueryResult<TData, TError> & { queryKey: QueryKey } => {
+
+  const queryOptions = getApiEnergyLogsListInfiniteQueryOptions(params,options)
+
+  const query = useInfiniteQuery(queryOptions) as  UseInfiniteQueryResult<TData, TError> & { queryKey: QueryKey };
+
+  query.queryKey = queryOptions.queryKey ;
+
+  return query;
+}
+
+export const getApiEnergyLogsListQueryOptions = <TData = Awaited<ReturnType<typeof apiEnergyLogsList>>, TError = unknown>(params?: ApiEnergyLogsListParams, options?: { query?:UseQueryOptions<Awaited<ReturnType<typeof apiEnergyLogsList>>, TError, TData>, request?: SecondParameter<typeof axiosInstance>}
+): UseQueryOptions<Awaited<ReturnType<typeof apiEnergyLogsList>>, TError, TData> & { queryKey: QueryKey } => {
+const {query: queryOptions, request: requestOptions} = options ?? {};
+
+  const queryKey =  queryOptions?.queryKey ?? getApiEnergyLogsListQueryKey(params);
+
+  
+  
+    const queryFn: QueryFunction<Awaited<ReturnType<typeof apiEnergyLogsList>>> = ({ signal }) => apiEnergyLogsList(params, requestOptions, signal);
+    
+      
+      
+   return  { queryKey, queryFn,   staleTime: Infinity, refetchOnWindowFocus: false, retry: 1,  ...queryOptions}}
+
+export type ApiEnergyLogsListQueryResult = NonNullable<Awaited<ReturnType<typeof apiEnergyLogsList>>>
+export type ApiEnergyLogsListQueryError = unknown
+
+export const useApiEnergyLogsList = <TData = Awaited<ReturnType<typeof apiEnergyLogsList>>, TError = unknown>(
+ params?: ApiEnergyLogsListParams, options?: { query?:UseQueryOptions<Awaited<ReturnType<typeof apiEnergyLogsList>>, TError, TData>, request?: SecondParameter<typeof axiosInstance>}
+
+  ):  UseQueryResult<TData, TError> & { queryKey: QueryKey } => {
+
+  const queryOptions = getApiEnergyLogsListQueryOptions(params,options)
+
+  const query = useQuery(queryOptions) as  UseQueryResult<TData, TError> & { queryKey: QueryKey };
+
+  query.queryKey = queryOptions.queryKey ;
+
+  return query;
+}
+
+/**
  * OpenApi3 schema for this API. Format can be selected via content negotiation.
 
 - YAML: application/vnd.oai.openapi
@@ -668,30 +754,370 @@ export const useApiSchemaRetrieve = <TData = Awaited<ReturnType<typeof apiSchema
   return query;
 }
 
-export const apiUsersList = (
-    
+export const apiUserCarsList = (
+    params?: ApiUserCarsListParams,
  options?: SecondParameter<typeof axiosInstance>,signal?: AbortSignal
 ) => {
-      return axiosInstance<User[]>(
-      {url: `/api/users/`, method: 'get', signal
+      return axiosInstance<PaginatedUserCarModelList>(
+      {url: `/api/user-cars/`, method: 'get',
+        params, signal
     },
       options);
     }
   
 
-export const getApiUsersListQueryKey = () => [`/api/users/`] as const;
+export const getApiUserCarsListQueryKey = (params?: ApiUserCarsListParams,) => [`/api/user-cars/`, ...(params ? [params]: [])] as const;
   
 
     
-export const getApiUsersListInfiniteQueryOptions = <TData = Awaited<ReturnType<typeof apiUsersList>>, TError = unknown>( options?: { query?:UseInfiniteQueryOptions<Awaited<ReturnType<typeof apiUsersList>>, TError, TData>, request?: SecondParameter<typeof axiosInstance>}
+export const getApiUserCarsListInfiniteQueryOptions = <TData = Awaited<ReturnType<typeof apiUserCarsList>>, TError = unknown>(params?: ApiUserCarsListParams, options?: { query?:UseInfiniteQueryOptions<Awaited<ReturnType<typeof apiUserCarsList>>, TError, TData>, request?: SecondParameter<typeof axiosInstance>}
+): UseInfiniteQueryOptions<Awaited<ReturnType<typeof apiUserCarsList>>, TError, TData> & { queryKey: QueryKey } => {
+const {query: queryOptions, request: requestOptions} = options ?? {};
+
+  const queryKey =  queryOptions?.queryKey ?? getApiUserCarsListQueryKey(params);
+
+  
+  
+    const queryFn: QueryFunction<Awaited<ReturnType<typeof apiUserCarsList>>> = ({ signal }) => apiUserCarsList(params, requestOptions, signal);
+    
+      
+      
+   return  { queryKey, queryFn,   staleTime: Infinity, refetchOnWindowFocus: false, retry: 1,  ...queryOptions}}
+
+export type ApiUserCarsListInfiniteQueryResult = NonNullable<Awaited<ReturnType<typeof apiUserCarsList>>>
+export type ApiUserCarsListInfiniteQueryError = unknown
+
+export const useApiUserCarsListInfinite = <TData = Awaited<ReturnType<typeof apiUserCarsList>>, TError = unknown>(
+ params?: ApiUserCarsListParams, options?: { query?:UseInfiniteQueryOptions<Awaited<ReturnType<typeof apiUserCarsList>>, TError, TData>, request?: SecondParameter<typeof axiosInstance>}
+
+  ):  UseInfiniteQueryResult<TData, TError> & { queryKey: QueryKey } => {
+
+  const queryOptions = getApiUserCarsListInfiniteQueryOptions(params,options)
+
+  const query = useInfiniteQuery(queryOptions) as  UseInfiniteQueryResult<TData, TError> & { queryKey: QueryKey };
+
+  query.queryKey = queryOptions.queryKey ;
+
+  return query;
+}
+
+export const getApiUserCarsListQueryOptions = <TData = Awaited<ReturnType<typeof apiUserCarsList>>, TError = unknown>(params?: ApiUserCarsListParams, options?: { query?:UseQueryOptions<Awaited<ReturnType<typeof apiUserCarsList>>, TError, TData>, request?: SecondParameter<typeof axiosInstance>}
+): UseQueryOptions<Awaited<ReturnType<typeof apiUserCarsList>>, TError, TData> & { queryKey: QueryKey } => {
+const {query: queryOptions, request: requestOptions} = options ?? {};
+
+  const queryKey =  queryOptions?.queryKey ?? getApiUserCarsListQueryKey(params);
+
+  
+  
+    const queryFn: QueryFunction<Awaited<ReturnType<typeof apiUserCarsList>>> = ({ signal }) => apiUserCarsList(params, requestOptions, signal);
+    
+      
+      
+   return  { queryKey, queryFn,   staleTime: Infinity, refetchOnWindowFocus: false, retry: 1,  ...queryOptions}}
+
+export type ApiUserCarsListQueryResult = NonNullable<Awaited<ReturnType<typeof apiUserCarsList>>>
+export type ApiUserCarsListQueryError = unknown
+
+export const useApiUserCarsList = <TData = Awaited<ReturnType<typeof apiUserCarsList>>, TError = unknown>(
+ params?: ApiUserCarsListParams, options?: { query?:UseQueryOptions<Awaited<ReturnType<typeof apiUserCarsList>>, TError, TData>, request?: SecondParameter<typeof axiosInstance>}
+
+  ):  UseQueryResult<TData, TError> & { queryKey: QueryKey } => {
+
+  const queryOptions = getApiUserCarsListQueryOptions(params,options)
+
+  const query = useQuery(queryOptions) as  UseQueryResult<TData, TError> & { queryKey: QueryKey };
+
+  query.queryKey = queryOptions.queryKey ;
+
+  return query;
+}
+
+export const apiUserCarsCreate = (
+    userCarModel: NonReadonly<UserCarModel>,
+ options?: SecondParameter<typeof axiosInstance>,) => {
+      return axiosInstance<UserCarModel>(
+      {url: `/api/user-cars/`, method: 'post',
+      headers: {'Content-Type': 'application/json', },
+      data: userCarModel
+    },
+      options);
+    }
+  
+
+
+export const getApiUserCarsCreateMutationOptions = <TError = unknown,
+    
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof apiUserCarsCreate>>, TError,{data: NonReadonly<UserCarModel>}, TContext>, request?: SecondParameter<typeof axiosInstance>}
+): UseMutationOptions<Awaited<ReturnType<typeof apiUserCarsCreate>>, TError,{data: NonReadonly<UserCarModel>}, TContext> => {
+ const {mutation: mutationOptions, request: requestOptions} = options ?? {};
+
+      
+
+
+      const mutationFn: MutationFunction<Awaited<ReturnType<typeof apiUserCarsCreate>>, {data: NonReadonly<UserCarModel>}> = (props) => {
+          const {data} = props ?? {};
+
+          return  apiUserCarsCreate(data,requestOptions)
+        }
+
+        
+
+ 
+   return  { mutationFn, ...mutationOptions }}
+
+    export type ApiUserCarsCreateMutationResult = NonNullable<Awaited<ReturnType<typeof apiUserCarsCreate>>>
+    export type ApiUserCarsCreateMutationBody = NonReadonly<UserCarModel>
+    export type ApiUserCarsCreateMutationError = unknown
+
+    export const useApiUserCarsCreate = <TError = unknown,
+    
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof apiUserCarsCreate>>, TError,{data: NonReadonly<UserCarModel>}, TContext>, request?: SecondParameter<typeof axiosInstance>}
+) => {
+    
+      const mutationOptions = getApiUserCarsCreateMutationOptions(options);
+     
+      return useMutation(mutationOptions);
+    }
+    export const apiUserCarsRetrieve = (
+    id: number,
+ options?: SecondParameter<typeof axiosInstance>,signal?: AbortSignal
+) => {
+      return axiosInstance<UserCarModel>(
+      {url: `/api/user-cars/${id}/`, method: 'get', signal
+    },
+      options);
+    }
+  
+
+export const getApiUserCarsRetrieveQueryKey = (id: number,) => [`/api/user-cars/${id}/`] as const;
+  
+
+    
+export const getApiUserCarsRetrieveInfiniteQueryOptions = <TData = Awaited<ReturnType<typeof apiUserCarsRetrieve>>, TError = unknown>(id: number, options?: { query?:UseInfiniteQueryOptions<Awaited<ReturnType<typeof apiUserCarsRetrieve>>, TError, TData>, request?: SecondParameter<typeof axiosInstance>}
+): UseInfiniteQueryOptions<Awaited<ReturnType<typeof apiUserCarsRetrieve>>, TError, TData> & { queryKey: QueryKey } => {
+const {query: queryOptions, request: requestOptions} = options ?? {};
+
+  const queryKey =  queryOptions?.queryKey ?? getApiUserCarsRetrieveQueryKey(id);
+
+  
+  
+    const queryFn: QueryFunction<Awaited<ReturnType<typeof apiUserCarsRetrieve>>> = ({ signal }) => apiUserCarsRetrieve(id, requestOptions, signal);
+    
+      
+      
+   return  { queryKey, queryFn, enabled: !!(id),  staleTime: Infinity, refetchOnWindowFocus: false, retry: 1,  ...queryOptions}}
+
+export type ApiUserCarsRetrieveInfiniteQueryResult = NonNullable<Awaited<ReturnType<typeof apiUserCarsRetrieve>>>
+export type ApiUserCarsRetrieveInfiniteQueryError = unknown
+
+export const useApiUserCarsRetrieveInfinite = <TData = Awaited<ReturnType<typeof apiUserCarsRetrieve>>, TError = unknown>(
+ id: number, options?: { query?:UseInfiniteQueryOptions<Awaited<ReturnType<typeof apiUserCarsRetrieve>>, TError, TData>, request?: SecondParameter<typeof axiosInstance>}
+
+  ):  UseInfiniteQueryResult<TData, TError> & { queryKey: QueryKey } => {
+
+  const queryOptions = getApiUserCarsRetrieveInfiniteQueryOptions(id,options)
+
+  const query = useInfiniteQuery(queryOptions) as  UseInfiniteQueryResult<TData, TError> & { queryKey: QueryKey };
+
+  query.queryKey = queryOptions.queryKey ;
+
+  return query;
+}
+
+export const getApiUserCarsRetrieveQueryOptions = <TData = Awaited<ReturnType<typeof apiUserCarsRetrieve>>, TError = unknown>(id: number, options?: { query?:UseQueryOptions<Awaited<ReturnType<typeof apiUserCarsRetrieve>>, TError, TData>, request?: SecondParameter<typeof axiosInstance>}
+): UseQueryOptions<Awaited<ReturnType<typeof apiUserCarsRetrieve>>, TError, TData> & { queryKey: QueryKey } => {
+const {query: queryOptions, request: requestOptions} = options ?? {};
+
+  const queryKey =  queryOptions?.queryKey ?? getApiUserCarsRetrieveQueryKey(id);
+
+  
+  
+    const queryFn: QueryFunction<Awaited<ReturnType<typeof apiUserCarsRetrieve>>> = ({ signal }) => apiUserCarsRetrieve(id, requestOptions, signal);
+    
+      
+      
+   return  { queryKey, queryFn, enabled: !!(id),  staleTime: Infinity, refetchOnWindowFocus: false, retry: 1,  ...queryOptions}}
+
+export type ApiUserCarsRetrieveQueryResult = NonNullable<Awaited<ReturnType<typeof apiUserCarsRetrieve>>>
+export type ApiUserCarsRetrieveQueryError = unknown
+
+export const useApiUserCarsRetrieve = <TData = Awaited<ReturnType<typeof apiUserCarsRetrieve>>, TError = unknown>(
+ id: number, options?: { query?:UseQueryOptions<Awaited<ReturnType<typeof apiUserCarsRetrieve>>, TError, TData>, request?: SecondParameter<typeof axiosInstance>}
+
+  ):  UseQueryResult<TData, TError> & { queryKey: QueryKey } => {
+
+  const queryOptions = getApiUserCarsRetrieveQueryOptions(id,options)
+
+  const query = useQuery(queryOptions) as  UseQueryResult<TData, TError> & { queryKey: QueryKey };
+
+  query.queryKey = queryOptions.queryKey ;
+
+  return query;
+}
+
+export const apiUserCarsUpdate = (
+    id: number,
+    userCarModel: NonReadonly<UserCarModel>,
+ options?: SecondParameter<typeof axiosInstance>,) => {
+      return axiosInstance<UserCarModel>(
+      {url: `/api/user-cars/${id}/`, method: 'put',
+      headers: {'Content-Type': 'application/json', },
+      data: userCarModel
+    },
+      options);
+    }
+  
+
+
+export const getApiUserCarsUpdateMutationOptions = <TError = unknown,
+    
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof apiUserCarsUpdate>>, TError,{id: number;data: NonReadonly<UserCarModel>}, TContext>, request?: SecondParameter<typeof axiosInstance>}
+): UseMutationOptions<Awaited<ReturnType<typeof apiUserCarsUpdate>>, TError,{id: number;data: NonReadonly<UserCarModel>}, TContext> => {
+ const {mutation: mutationOptions, request: requestOptions} = options ?? {};
+
+      
+
+
+      const mutationFn: MutationFunction<Awaited<ReturnType<typeof apiUserCarsUpdate>>, {id: number;data: NonReadonly<UserCarModel>}> = (props) => {
+          const {id,data} = props ?? {};
+
+          return  apiUserCarsUpdate(id,data,requestOptions)
+        }
+
+        
+
+ 
+   return  { mutationFn, ...mutationOptions }}
+
+    export type ApiUserCarsUpdateMutationResult = NonNullable<Awaited<ReturnType<typeof apiUserCarsUpdate>>>
+    export type ApiUserCarsUpdateMutationBody = NonReadonly<UserCarModel>
+    export type ApiUserCarsUpdateMutationError = unknown
+
+    export const useApiUserCarsUpdate = <TError = unknown,
+    
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof apiUserCarsUpdate>>, TError,{id: number;data: NonReadonly<UserCarModel>}, TContext>, request?: SecondParameter<typeof axiosInstance>}
+) => {
+    
+      const mutationOptions = getApiUserCarsUpdateMutationOptions(options);
+     
+      return useMutation(mutationOptions);
+    }
+    export const apiUserCarsPartialUpdate = (
+    id: number,
+    patchedUserCarModel: NonReadonly<PatchedUserCarModel>,
+ options?: SecondParameter<typeof axiosInstance>,) => {
+      return axiosInstance<UserCarModel>(
+      {url: `/api/user-cars/${id}/`, method: 'patch',
+      headers: {'Content-Type': 'application/json', },
+      data: patchedUserCarModel
+    },
+      options);
+    }
+  
+
+
+export const getApiUserCarsPartialUpdateMutationOptions = <TError = unknown,
+    
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof apiUserCarsPartialUpdate>>, TError,{id: number;data: NonReadonly<PatchedUserCarModel>}, TContext>, request?: SecondParameter<typeof axiosInstance>}
+): UseMutationOptions<Awaited<ReturnType<typeof apiUserCarsPartialUpdate>>, TError,{id: number;data: NonReadonly<PatchedUserCarModel>}, TContext> => {
+ const {mutation: mutationOptions, request: requestOptions} = options ?? {};
+
+      
+
+
+      const mutationFn: MutationFunction<Awaited<ReturnType<typeof apiUserCarsPartialUpdate>>, {id: number;data: NonReadonly<PatchedUserCarModel>}> = (props) => {
+          const {id,data} = props ?? {};
+
+          return  apiUserCarsPartialUpdate(id,data,requestOptions)
+        }
+
+        
+
+ 
+   return  { mutationFn, ...mutationOptions }}
+
+    export type ApiUserCarsPartialUpdateMutationResult = NonNullable<Awaited<ReturnType<typeof apiUserCarsPartialUpdate>>>
+    export type ApiUserCarsPartialUpdateMutationBody = NonReadonly<PatchedUserCarModel>
+    export type ApiUserCarsPartialUpdateMutationError = unknown
+
+    export const useApiUserCarsPartialUpdate = <TError = unknown,
+    
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof apiUserCarsPartialUpdate>>, TError,{id: number;data: NonReadonly<PatchedUserCarModel>}, TContext>, request?: SecondParameter<typeof axiosInstance>}
+) => {
+    
+      const mutationOptions = getApiUserCarsPartialUpdateMutationOptions(options);
+     
+      return useMutation(mutationOptions);
+    }
+    export const apiUserCarsDestroy = (
+    id: number,
+ options?: SecondParameter<typeof axiosInstance>,) => {
+      return axiosInstance<void>(
+      {url: `/api/user-cars/${id}/`, method: 'delete'
+    },
+      options);
+    }
+  
+
+
+export const getApiUserCarsDestroyMutationOptions = <TError = unknown,
+    
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof apiUserCarsDestroy>>, TError,{id: number}, TContext>, request?: SecondParameter<typeof axiosInstance>}
+): UseMutationOptions<Awaited<ReturnType<typeof apiUserCarsDestroy>>, TError,{id: number}, TContext> => {
+ const {mutation: mutationOptions, request: requestOptions} = options ?? {};
+
+      
+
+
+      const mutationFn: MutationFunction<Awaited<ReturnType<typeof apiUserCarsDestroy>>, {id: number}> = (props) => {
+          const {id} = props ?? {};
+
+          return  apiUserCarsDestroy(id,requestOptions)
+        }
+
+        
+
+ 
+   return  { mutationFn, ...mutationOptions }}
+
+    export type ApiUserCarsDestroyMutationResult = NonNullable<Awaited<ReturnType<typeof apiUserCarsDestroy>>>
+    
+    export type ApiUserCarsDestroyMutationError = unknown
+
+    export const useApiUserCarsDestroy = <TError = unknown,
+    
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof apiUserCarsDestroy>>, TError,{id: number}, TContext>, request?: SecondParameter<typeof axiosInstance>}
+) => {
+    
+      const mutationOptions = getApiUserCarsDestroyMutationOptions(options);
+     
+      return useMutation(mutationOptions);
+    }
+    export const apiUsersList = (
+    params?: ApiUsersListParams,
+ options?: SecondParameter<typeof axiosInstance>,signal?: AbortSignal
+) => {
+      return axiosInstance<PaginatedUserList>(
+      {url: `/api/users/`, method: 'get',
+        params, signal
+    },
+      options);
+    }
+  
+
+export const getApiUsersListQueryKey = (params?: ApiUsersListParams,) => [`/api/users/`, ...(params ? [params]: [])] as const;
+  
+
+    
+export const getApiUsersListInfiniteQueryOptions = <TData = Awaited<ReturnType<typeof apiUsersList>>, TError = unknown>(params?: ApiUsersListParams, options?: { query?:UseInfiniteQueryOptions<Awaited<ReturnType<typeof apiUsersList>>, TError, TData>, request?: SecondParameter<typeof axiosInstance>}
 ): UseInfiniteQueryOptions<Awaited<ReturnType<typeof apiUsersList>>, TError, TData> & { queryKey: QueryKey } => {
 const {query: queryOptions, request: requestOptions} = options ?? {};
 
-  const queryKey =  queryOptions?.queryKey ?? getApiUsersListQueryKey();
+  const queryKey =  queryOptions?.queryKey ?? getApiUsersListQueryKey(params);
 
   
   
-    const queryFn: QueryFunction<Awaited<ReturnType<typeof apiUsersList>>> = ({ signal }) => apiUsersList(requestOptions, signal);
+    const queryFn: QueryFunction<Awaited<ReturnType<typeof apiUsersList>>> = ({ signal }) => apiUsersList(params, requestOptions, signal);
     
       
       
@@ -701,11 +1127,11 @@ export type ApiUsersListInfiniteQueryResult = NonNullable<Awaited<ReturnType<typ
 export type ApiUsersListInfiniteQueryError = unknown
 
 export const useApiUsersListInfinite = <TData = Awaited<ReturnType<typeof apiUsersList>>, TError = unknown>(
-  options?: { query?:UseInfiniteQueryOptions<Awaited<ReturnType<typeof apiUsersList>>, TError, TData>, request?: SecondParameter<typeof axiosInstance>}
+ params?: ApiUsersListParams, options?: { query?:UseInfiniteQueryOptions<Awaited<ReturnType<typeof apiUsersList>>, TError, TData>, request?: SecondParameter<typeof axiosInstance>}
 
   ):  UseInfiniteQueryResult<TData, TError> & { queryKey: QueryKey } => {
 
-  const queryOptions = getApiUsersListInfiniteQueryOptions(options)
+  const queryOptions = getApiUsersListInfiniteQueryOptions(params,options)
 
   const query = useInfiniteQuery(queryOptions) as  UseInfiniteQueryResult<TData, TError> & { queryKey: QueryKey };
 
@@ -714,15 +1140,15 @@ export const useApiUsersListInfinite = <TData = Awaited<ReturnType<typeof apiUse
   return query;
 }
 
-export const getApiUsersListQueryOptions = <TData = Awaited<ReturnType<typeof apiUsersList>>, TError = unknown>( options?: { query?:UseQueryOptions<Awaited<ReturnType<typeof apiUsersList>>, TError, TData>, request?: SecondParameter<typeof axiosInstance>}
+export const getApiUsersListQueryOptions = <TData = Awaited<ReturnType<typeof apiUsersList>>, TError = unknown>(params?: ApiUsersListParams, options?: { query?:UseQueryOptions<Awaited<ReturnType<typeof apiUsersList>>, TError, TData>, request?: SecondParameter<typeof axiosInstance>}
 ): UseQueryOptions<Awaited<ReturnType<typeof apiUsersList>>, TError, TData> & { queryKey: QueryKey } => {
 const {query: queryOptions, request: requestOptions} = options ?? {};
 
-  const queryKey =  queryOptions?.queryKey ?? getApiUsersListQueryKey();
+  const queryKey =  queryOptions?.queryKey ?? getApiUsersListQueryKey(params);
 
   
   
-    const queryFn: QueryFunction<Awaited<ReturnType<typeof apiUsersList>>> = ({ signal }) => apiUsersList(requestOptions, signal);
+    const queryFn: QueryFunction<Awaited<ReturnType<typeof apiUsersList>>> = ({ signal }) => apiUsersList(params, requestOptions, signal);
     
       
       
@@ -732,11 +1158,11 @@ export type ApiUsersListQueryResult = NonNullable<Awaited<ReturnType<typeof apiU
 export type ApiUsersListQueryError = unknown
 
 export const useApiUsersList = <TData = Awaited<ReturnType<typeof apiUsersList>>, TError = unknown>(
-  options?: { query?:UseQueryOptions<Awaited<ReturnType<typeof apiUsersList>>, TError, TData>, request?: SecondParameter<typeof axiosInstance>}
+ params?: ApiUsersListParams, options?: { query?:UseQueryOptions<Awaited<ReturnType<typeof apiUsersList>>, TError, TData>, request?: SecondParameter<typeof axiosInstance>}
 
   ):  UseQueryResult<TData, TError> & { queryKey: QueryKey } => {
 
-  const queryOptions = getApiUsersListQueryOptions(options)
+  const queryOptions = getApiUsersListQueryOptions(params,options)
 
   const query = useQuery(queryOptions) as  UseQueryResult<TData, TError> & { queryKey: QueryKey };
 
