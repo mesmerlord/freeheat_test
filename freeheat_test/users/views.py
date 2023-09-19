@@ -5,6 +5,10 @@ from django.urls import reverse
 from django.utils.translation import gettext_lazy as _
 from django.views.generic import DetailView, RedirectView, UpdateView
 
+from dj_rest_auth.registration.views import RegisterView
+
+from freeheat_test.users.api.serializers import RegistrationSerializer
+
 User = get_user_model()
 
 
@@ -41,3 +45,7 @@ class UserRedirectView(LoginRequiredMixin, RedirectView):
 
 
 user_redirect_view = UserRedirectView.as_view()
+
+
+class RegistrationView(RegisterView):
+    serializer_class = RegistrationSerializer

@@ -137,3 +137,11 @@ SPECTACULAR_SETTINGS["SERVERS"] = [  # noqa: F405
 ]
 # Your stuff...
 # ------------------------------------------------------------------------------
+
+
+SPECTACULAR_SETTINGS = {
+    "TITLE": "freeheat_test API",
+    "DESCRIPTION": "Documentation of API endpoints of freeheat_test",
+    "VERSION": "1.0.0",
+    "SERVE_PERMISSIONS": ["rest_framework.permissions.IsAdminUser"],
+}

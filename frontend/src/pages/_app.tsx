@@ -1,5 +1,6 @@
 import Background from "@/components/Background";
 import Loading from "@/components/Loading";
+import CustomNavbar from "@/components/common/CustomNavbar";
 import { Notifications } from "@mantine/notifications";
 import {
   Hydrate,
@@ -65,7 +66,9 @@ const App = (props: AppProps) => {
             isRouteChanging={state.isRouteChanging}
             key={state.loadingKey}
           />
-          <Component {...pageProps} />
+          <CustomNavbar>
+            <Component {...pageProps} />
+          </CustomNavbar>
         </Background>
 
         <Notifications />
