@@ -1,0 +1,7 @@
+# PostgreSQL
+# ------------------------------------------------------------------------------
+POSTGRES_HOST=postgres
+POSTGRES_PORT=5432
+POSTGRES_DB=freeheat_test
+POSTGRES_USER=iICCKXtlXsEHqyRiBOpfGCtTvOoYMPkA
+POSTGRES_PASSWORD=tTqGr0qQ3AUXkWtcvSfZfPCTfgFRQBBXKW0CdtAxd1OcNgQc7qfmv6OcZYhhBE37
