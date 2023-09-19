@@ -62,13 +62,10 @@ const App = (props: AppProps) => {
 
   useEffect(() => {
     const accessToken = nookies.get(null)?.accessToken;
-    if (accessToken && router.pathname !== routes.dashboard) {
+    if (accessToken && router.pathname === routes.home) {
       router.push(routes.dashboard);
     }
-    if (
-      !accessToken &&
-      ![routes.login, routes.register]?.includes(router.pathname)
-    ) {
+    if (!accessToken && router.pathname === routes.home) {
       router.push(routes.login);
     }
   }, [router]);

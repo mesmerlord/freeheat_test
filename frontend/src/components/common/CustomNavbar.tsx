@@ -4,6 +4,7 @@ import {
 } from "@/api/api";
 import { routes } from "@/utils/routes";
 import {
+  AppShell,
   Avatar,
   Burger,
   Button,
@@ -14,6 +15,8 @@ import {
   Header,
   MediaQuery,
   Menu,
+  NavLink,
+  Navbar,
   Stack,
   Title,
   createStyles,
@@ -25,6 +28,8 @@ import { useQueryClient } from "@tanstack/react-query";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import nookies from "nookies";
+
+import { GridIcon, LightningBoltIcon } from "@radix-ui/react-icons";
 
 const HEADER_HEIGHT = rem(60);
 
@@ -100,7 +105,7 @@ const useStyles = createStyles((theme) => ({
   },
 }));
 
-const CustomNavbar = ({ children }: { children: React.ReactNode }) => {
+const CustomNavbar = () => {
   const theme = useMantineTheme();
   const { push, query } = useRouter();
   const [opened, { toggle, close }] = useDisclosure(false);
@@ -151,6 +156,21 @@ const CustomNavbar = ({ children }: { children: React.ReactNode }) => {
           }}
         >
           <Stack spacing="md" mt={50}>
+            {!meData?.username && (
+              <Stack>
+                <Button
+                  component={Link}
+                  href={routes.login}
+                  color="gray"
+                  fullWidth
+                >
+                  Login
+                </Button>
+                <Button component={Link} href={routes.register} fullWidth>
+                  Register
+                </Button>
+              </Stack>
+            )}
             {meData?.username && (
               <Group noWrap position="center" spacing={20} mb={20}>
                 <Menu>
@@ -191,7 +211,7 @@ const CustomNavbar = ({ children }: { children: React.ReactNode }) => {
                 }}
               >
                 <Title
-                  order={3}
+                  order={2}
                   sx={(theme) => ({
                     [theme.fn.smallerThan("md")]: { fontSize: "22px" },
                     color: "white",
@@ -284,9 +304,70 @@ const CustomNavbar = ({ children }: { children: React.ReactNode }) => {
           </MediaQuery>
         </Grid>
       </Header>
-      {children}
     </Stack>
   );
 };
 
-export default CustomNavbar;
+const CustomAppShell = ({ children }: { children: React.ReactNode }) => {
+  const { data: meData } = useApiUsersMeRetrieve({
+    query: {
+      retry: 1,
+    },
+  });
+
+  return (
+    <AppShell
+      header={
+        <Header height={100} p={0} m={0}>
+          <CustomNavbar />
+        </Header>
+      }
+      navbar={
+        <Navbar
+          width={{ base: 300 }}
+          height={500}
+          p={0}
+          color="blue"
+          hiddenBreakpoint="sm"
+          hidden={true}
+        >
+          <Navbar.Section>
+            <NavLink
+              active={false}
+              component={Link}
+              href={routes.carDashboard}
+              label={
+                <Group>
+                  <GridIcon transform="scale(1.2)" />
+
+                  <Title order={4}>Your Cars</Title>
+                </Group>
+              }
+              sx={{
+                span: { fontSize: "22px" },
+              }}
+            />
+            <NavLink
+              active={false}
+              component={Link}
+              href={routes.electricityDashboard}
+              label={
+                <Group>
+                  <LightningBoltIcon transform="scale(1.2)" />
+                  <Title order={4}>Electricity Prices</Title>
+                </Group>
+              }
+              sx={{
+                span: { fontSize: "22px" },
+              }}
+            />
+          </Navbar.Section>
+        </Navbar>
+      }
+    >
+      {children}
+    </AppShell>
+  );
+};
+
+export default CustomAppShell;

@@ -70,7 +70,7 @@ const LoginBoxUnwrapped = ({ defaultTab = "login" }) => {
             loading: false,
             autoClose: 2000,
             title: `Login Failed`,
-            message: `Your Login is failed, please try again`,
+            message: `Your Login failed, please try again`,
           });
           errorNotification(error);
         },

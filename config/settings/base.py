@@ -336,3 +336,12 @@ SPECTACULAR_SETTINGS = {
 }
 # Your stuff...
 # ------------------------------------------------------------------------------
+CORS_ALLOWED_ORIGINS = (
+    "http://django",
+    "http://django.docker.localhost",
+    "http://localhost:3000",
+)
+CSRF_TRUSTED_ORIGINS = (
+    "http://django",
+    "http://django.docker.localhost",
+)
