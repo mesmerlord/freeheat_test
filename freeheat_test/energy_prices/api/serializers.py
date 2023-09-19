@@ -6,10 +6,15 @@ from freeheat_test.energy_prices.models import EnergyPriceLog, UserCar
 class UserCarModelSerializer(serializers.ModelSerializer):
     class Meta:
         model = UserCar
-        fields = "__all__"
+        exclude = ["created_at", "updated_at"]
+        read_only_fields = ["owner"]
+
+    def create(self, validated_data):
+        validated_data["owner"] = self.context["request"].user
+        return super().create(validated_data)
 
 
 class EnergyPriceLogModelSerializer(serializers.ModelSerializer):
     class Meta:
         model = EnergyPriceLog
-        fields = "__all__"
+        exclude = ["created_at"]

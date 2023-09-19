@@ -323,46 +323,50 @@ const CustomAppShell = ({ children }: { children: React.ReactNode }) => {
         </Header>
       }
       navbar={
-        <Navbar
-          width={{ base: 300 }}
-          height={500}
-          p={0}
-          color="blue"
-          hiddenBreakpoint="sm"
-          hidden={true}
-        >
-          <Navbar.Section>
-            <NavLink
-              active={false}
-              component={Link}
-              href={routes.carDashboard}
-              label={
-                <Group>
-                  <GridIcon transform="scale(1.2)" />
+        !meData?.username ? (
+          <></>
+        ) : (
+          <Navbar
+            width={{ base: 300 }}
+            height={500}
+            p={0}
+            color="blue"
+            hiddenBreakpoint="md"
+            hidden={true}
+          >
+            <Navbar.Section>
+              <NavLink
+                active={false}
+                component={Link}
+                href={routes.carDashboard}
+                label={
+                  <Group>
+                    <GridIcon transform="scale(1.2)" />
 
-                  <Title order={4}>Your Cars</Title>
-                </Group>
-              }
-              sx={{
-                span: { fontSize: "22px" },
-              }}
-            />
-            <NavLink
-              active={false}
-              component={Link}
-              href={routes.electricityDashboard}
-              label={
-                <Group>
-                  <LightningBoltIcon transform="scale(1.2)" />
-                  <Title order={4}>Electricity Prices</Title>
-                </Group>
-              }
-              sx={{
-                span: { fontSize: "22px" },
-              }}
-            />
-          </Navbar.Section>
-        </Navbar>
+                    <Title order={4}>Your Cars</Title>
+                  </Group>
+                }
+                sx={{
+                  span: { fontSize: "22px" },
+                }}
+              />
+              <NavLink
+                active={false}
+                component={Link}
+                href={routes.electricityDashboard}
+                label={
+                  <Group>
+                    <LightningBoltIcon transform="scale(1.2)" />
+                    <Title order={4}>Electricity Prices</Title>
+                  </Group>
+                }
+                sx={{
+                  span: { fontSize: "22px" },
+                }}
+              />
+            </Navbar.Section>
+          </Navbar>
+        )
       }
     >
       {children}

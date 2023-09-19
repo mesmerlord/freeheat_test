@@ -8,7 +8,6 @@
 
 export interface EnergyPriceLogModel {
   readonly id: number;
-  readonly created_at: string;
   readonly updated_at: string;
   price: string;
 }

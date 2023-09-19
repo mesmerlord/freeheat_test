@@ -8,8 +8,6 @@
 
 export interface PatchedUserCarModel {
   readonly id?: number;
-  readonly created_at?: string;
-  readonly updated_at?: string;
   name?: string;
   model?: string;
   year?: number;
@@ -17,5 +15,5 @@ export interface PatchedUserCarModel {
   current_energy?: string;
   is_charging?: boolean;
   is_active?: boolean;
-  owner?: number;
+  readonly owner?: number;
 }
