@@ -1,6 +1,7 @@
 import Background from "@/components/Background";
 import Loading from "@/components/Loading";
 import CustomNavbar from "@/components/common/CustomNavbar";
+import { routes } from "@/utils/routes";
 import { Notifications } from "@mantine/notifications";
 import {
   Hydrate,
@@ -10,6 +11,7 @@ import {
 import { NextComponentType } from "next";
 import { AppProps } from "next/app";
 import { useRouter } from "next/router";
+import nookies from "nookies";
 import React, { useEffect, useState } from "react";
 
 const App = (props: AppProps) => {
@@ -57,6 +59,20 @@ const App = (props: AppProps) => {
       router.events.off("routeChangeError", handleRouteChangeEnd);
     };
   }, [router.events, router.pathname]);
+
+  useEffect(() => {
+    const accessToken = nookies.get(null)?.accessToken;
+    if (accessToken && router.pathname !== routes.dashboard) {
+      router.push(routes.dashboard);
+    }
+    if (
+      !accessToken &&
+      ![routes.login, routes.register]?.includes(router.pathname)
+    ) {
+      console.log(router.pathname);
+      router.push(routes.login);
+    }
+  }, [router]);
 
   return (
     <QueryClientProvider client={queryClient}>
