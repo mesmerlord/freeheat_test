@@ -81,11 +81,11 @@ THIRD_PARTY_APPS = [
     "corsheaders",
     "drf_spectacular",
     "django_filters",
-
 ]
 
 LOCAL_APPS = [
     "freeheat_test.users",
+    "freeheat_test.energy_prices",
     # Your stuff: custom apps go here
 ]
 # https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps

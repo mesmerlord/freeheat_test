@@ -69,7 +69,6 @@ const App = (props: AppProps) => {
       !accessToken &&
       ![routes.login, routes.register]?.includes(router.pathname)
     ) {
-      console.log(router.pathname);
       router.push(routes.login);
     }
   }, [router]);
