@@ -6,8 +6,7 @@
  * OpenAPI spec version: 1.0.0
  */
 
-export interface EnergyPriceLogModel {
-  readonly id: number;
-  readonly created_at: string;
-  price: string;
-}
+/**
+ * Unspecified response body
+ */
+export type ApiEnergyLogsUploadCsvCreate201 = {[key: string]: unknown};

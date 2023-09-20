@@ -32,11 +32,16 @@ import type {
   PatchedUserDetails,
   PaginatedEnergyPriceLogModelList,
   ApiEnergyLogsListParams,
+  ApiEnergyLogsUploadCsvCreate201,
+  ApiEnergyLogsUploadCsvCreate400,
+  ApiEnergyLogsUploadCsvCreateBody,
   ApiSchemaRetrieve200One,
   ApiSchemaRetrieve200Two,
   ApiSchemaRetrieve200Three,
   ApiSchemaRetrieve200Four,
   ApiSchemaRetrieveParams,
+  PaginatedUserCarChargeLogModelList,
+  ApiUserCarChargeLogsListParams,
   PaginatedUserCarModelList,
   ApiUserCarsListParams,
   UserCarModel,
@@ -672,6 +677,57 @@ export const useApiEnergyLogsList = <TData = Awaited<ReturnType<typeof apiEnergy
 }
 
 /**
+ * Upload CSV and seed the EnergyPriceLog model.
+ */
+export const apiEnergyLogsUploadCsvCreate = (
+    apiEnergyLogsUploadCsvCreateBody: ApiEnergyLogsUploadCsvCreateBody,
+ options?: SecondParameter<typeof axiosInstance>,) => {const formData = new FormData();
+formData.append('file', apiEnergyLogsUploadCsvCreateBody.file)
+
+      return axiosInstance<ApiEnergyLogsUploadCsvCreate201>(
+      {url: `/api/energy-logs/upload_csv/`, method: 'post',
+      headers: {'Content-Type': 'multipart/form-data', },
+       data: formData
+    },
+      options);
+    }
+  
+
+
+export const getApiEnergyLogsUploadCsvCreateMutationOptions = <TError = ApiEnergyLogsUploadCsvCreate400,
+    
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof apiEnergyLogsUploadCsvCreate>>, TError,{data: ApiEnergyLogsUploadCsvCreateBody}, TContext>, request?: SecondParameter<typeof axiosInstance>}
+): UseMutationOptions<Awaited<ReturnType<typeof apiEnergyLogsUploadCsvCreate>>, TError,{data: ApiEnergyLogsUploadCsvCreateBody}, TContext> => {
+ const {mutation: mutationOptions, request: requestOptions} = options ?? {};
+
+      
+
+
+      const mutationFn: MutationFunction<Awaited<ReturnType<typeof apiEnergyLogsUploadCsvCreate>>, {data: ApiEnergyLogsUploadCsvCreateBody}> = (props) => {
+          const {data} = props ?? {};
+
+          return  apiEnergyLogsUploadCsvCreate(data,requestOptions)
+        }
+
+        
+
+ 
+   return  { mutationFn, ...mutationOptions }}
+
+    export type ApiEnergyLogsUploadCsvCreateMutationResult = NonNullable<Awaited<ReturnType<typeof apiEnergyLogsUploadCsvCreate>>>
+    export type ApiEnergyLogsUploadCsvCreateMutationBody = ApiEnergyLogsUploadCsvCreateBody
+    export type ApiEnergyLogsUploadCsvCreateMutationError = ApiEnergyLogsUploadCsvCreate400
+
+    export const useApiEnergyLogsUploadCsvCreate = <TError = ApiEnergyLogsUploadCsvCreate400,
+    
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof apiEnergyLogsUploadCsvCreate>>, TError,{data: ApiEnergyLogsUploadCsvCreateBody}, TContext>, request?: SecondParameter<typeof axiosInstance>}
+) => {
+    
+      const mutationOptions = getApiEnergyLogsUploadCsvCreateMutationOptions(options);
+     
+      return useMutation(mutationOptions);
+    }
+    /**
  * OpenApi3 schema for this API. Format can be selected via content negotiation.
 
 - YAML: application/vnd.oai.openapi
@@ -747,6 +803,84 @@ export const useApiSchemaRetrieve = <TData = Awaited<ReturnType<typeof apiSchema
   ):  UseQueryResult<TData, TError> & { queryKey: QueryKey } => {
 
   const queryOptions = getApiSchemaRetrieveQueryOptions(params,options)
+
+  const query = useQuery(queryOptions) as  UseQueryResult<TData, TError> & { queryKey: QueryKey };
+
+  query.queryKey = queryOptions.queryKey ;
+
+  return query;
+}
+
+export const apiUserCarChargeLogsList = (
+    params?: ApiUserCarChargeLogsListParams,
+ options?: SecondParameter<typeof axiosInstance>,signal?: AbortSignal
+) => {
+      return axiosInstance<PaginatedUserCarChargeLogModelList>(
+      {url: `/api/user-car-charge-logs/`, method: 'get',
+        params, signal
+    },
+      options);
+    }
+  
+
+export const getApiUserCarChargeLogsListQueryKey = (params?: ApiUserCarChargeLogsListParams,) => [`/api/user-car-charge-logs/`, ...(params ? [params]: [])] as const;
+  
+
+    
+export const getApiUserCarChargeLogsListInfiniteQueryOptions = <TData = Awaited<ReturnType<typeof apiUserCarChargeLogsList>>, TError = unknown>(params?: ApiUserCarChargeLogsListParams, options?: { query?:UseInfiniteQueryOptions<Awaited<ReturnType<typeof apiUserCarChargeLogsList>>, TError, TData>, request?: SecondParameter<typeof axiosInstance>}
+): UseInfiniteQueryOptions<Awaited<ReturnType<typeof apiUserCarChargeLogsList>>, TError, TData> & { queryKey: QueryKey } => {
+const {query: queryOptions, request: requestOptions} = options ?? {};
+
+  const queryKey =  queryOptions?.queryKey ?? getApiUserCarChargeLogsListQueryKey(params);
+
+  
+  
+    const queryFn: QueryFunction<Awaited<ReturnType<typeof apiUserCarChargeLogsList>>> = ({ signal }) => apiUserCarChargeLogsList(params, requestOptions, signal);
+    
+      
+      
+   return  { queryKey, queryFn,   staleTime: Infinity, refetchOnWindowFocus: false, retry: 1,  ...queryOptions}}
+
+export type ApiUserCarChargeLogsListInfiniteQueryResult = NonNullable<Awaited<ReturnType<typeof apiUserCarChargeLogsList>>>
+export type ApiUserCarChargeLogsListInfiniteQueryError = unknown
+
+export const useApiUserCarChargeLogsListInfinite = <TData = Awaited<ReturnType<typeof apiUserCarChargeLogsList>>, TError = unknown>(
+ params?: ApiUserCarChargeLogsListParams, options?: { query?:UseInfiniteQueryOptions<Awaited<ReturnType<typeof apiUserCarChargeLogsList>>, TError, TData>, request?: SecondParameter<typeof axiosInstance>}
+
+  ):  UseInfiniteQueryResult<TData, TError> & { queryKey: QueryKey } => {
+
+  const queryOptions = getApiUserCarChargeLogsListInfiniteQueryOptions(params,options)
+
+  const query = useInfiniteQuery(queryOptions) as  UseInfiniteQueryResult<TData, TError> & { queryKey: QueryKey };
+
+  query.queryKey = queryOptions.queryKey ;
+
+  return query;
+}
+
+export const getApiUserCarChargeLogsListQueryOptions = <TData = Awaited<ReturnType<typeof apiUserCarChargeLogsList>>, TError = unknown>(params?: ApiUserCarChargeLogsListParams, options?: { query?:UseQueryOptions<Awaited<ReturnType<typeof apiUserCarChargeLogsList>>, TError, TData>, request?: SecondParameter<typeof axiosInstance>}
+): UseQueryOptions<Awaited<ReturnType<typeof apiUserCarChargeLogsList>>, TError, TData> & { queryKey: QueryKey } => {
+const {query: queryOptions, request: requestOptions} = options ?? {};
+
+  const queryKey =  queryOptions?.queryKey ?? getApiUserCarChargeLogsListQueryKey(params);
+
+  
+  
+    const queryFn: QueryFunction<Awaited<ReturnType<typeof apiUserCarChargeLogsList>>> = ({ signal }) => apiUserCarChargeLogsList(params, requestOptions, signal);
+    
+      
+      
+   return  { queryKey, queryFn,   staleTime: Infinity, refetchOnWindowFocus: false, retry: 1,  ...queryOptions}}
+
+export type ApiUserCarChargeLogsListQueryResult = NonNullable<Awaited<ReturnType<typeof apiUserCarChargeLogsList>>>
+export type ApiUserCarChargeLogsListQueryError = unknown
+
+export const useApiUserCarChargeLogsList = <TData = Awaited<ReturnType<typeof apiUserCarChargeLogsList>>, TError = unknown>(
+ params?: ApiUserCarChargeLogsListParams, options?: { query?:UseQueryOptions<Awaited<ReturnType<typeof apiUserCarChargeLogsList>>, TError, TData>, request?: SecondParameter<typeof axiosInstance>}
+
+  ):  UseQueryResult<TData, TError> & { queryKey: QueryKey } => {
+
+  const queryOptions = getApiUserCarChargeLogsListQueryOptions(params,options)
 
   const query = useQuery(queryOptions) as  UseQueryResult<TData, TError> & { queryKey: QueryKey };
 

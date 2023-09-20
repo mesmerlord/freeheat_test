@@ -30,17 +30,23 @@ export const getApiDjRestAuthUserUpdateMock = () => ({pk: faker.datatype.number(
 
 export const getApiDjRestAuthUserPartialUpdateMock = () => ({pk: faker.datatype.number({min: undefined, max: undefined}), username: faker.random.word(), email: faker.internet.email(), first_name: faker.random.word(), last_name: faker.random.word()})
 
-export const getApiEnergyLogsListMock = () => ({count: faker.helpers.arrayElement([faker.datatype.number({min: undefined, max: undefined}), undefined]), next: faker.helpers.arrayElement([faker.helpers.arrayElement([faker.internet.url(), null]), undefined]), previous: faker.helpers.arrayElement([faker.helpers.arrayElement([faker.internet.url(), null]), undefined]), results: faker.helpers.arrayElement([Array.from({ length: faker.datatype.number({ min: 1, max: 10 }) }, (_, i) => i + 1).map(() => ({id: faker.datatype.number({min: undefined, max: undefined}), updated_at: `${faker.date.past().toISOString().split('.')[0]}Z`, price: faker.random.word()})), undefined])})
+export const getApiEnergyLogsListMock = () => ({count: faker.helpers.arrayElement([faker.datatype.number({min: undefined, max: undefined}), undefined]), next: faker.helpers.arrayElement([faker.helpers.arrayElement([faker.internet.url(), null]), undefined]), previous: faker.helpers.arrayElement([faker.helpers.arrayElement([faker.internet.url(), null]), undefined]), results: faker.helpers.arrayElement([Array.from({ length: faker.datatype.number({ min: 1, max: 10 }) }, (_, i) => i + 1).map(() => ({id: faker.datatype.number({min: undefined, max: undefined}), created_at: `${faker.date.past().toISOString().split('.')[0]}Z`, price: faker.random.word()})), undefined])})
+
+export const getApiEnergyLogsUploadCsvCreateMock = () => ({
+        'clmrjjssh00004ey1aul39o60': {}
+      })
 
 export const getApiSchemaRetrieveMock = () => (faker.helpers.arrayElement([{
-        'clmrgi68j0000j0y1hyr82ue4': {}
+        'clmrjjssj00014ey169026lzw': {}
       }, {
-        'clmrgi68j0001j0y18ozr3k8c': {}
+        'clmrjjssj00024ey19u6s3bhe': {}
       }, {
-        'clmrgi68j0002j0y1ecdqhcwm': {}
+        'clmrjjssj00034ey1b6ybcb0p': {}
       }, {
-        'clmrgi68j0003j0y139gf5i18': {}
+        'clmrjjssj00044ey1brmz51k7': {}
       }]))
+
+export const getApiUserCarChargeLogsListMock = () => ({count: faker.helpers.arrayElement([faker.datatype.number({min: undefined, max: undefined}), undefined]), next: faker.helpers.arrayElement([faker.helpers.arrayElement([faker.internet.url(), null]), undefined]), previous: faker.helpers.arrayElement([faker.helpers.arrayElement([faker.internet.url(), null]), undefined]), results: faker.helpers.arrayElement([Array.from({ length: faker.datatype.number({ min: 1, max: 10 }) }, (_, i) => i + 1).map(() => ({id: faker.datatype.number({min: undefined, max: undefined}), created_at: `${faker.date.past().toISOString().split('.')[0]}Z`, energy: faker.random.word(), is_charging: faker.helpers.arrayElement([faker.datatype.boolean(), undefined]), user_car: faker.datatype.number({min: undefined, max: undefined})})), undefined])})
 
 export const getApiUserCarsListMock = () => ({count: faker.helpers.arrayElement([faker.datatype.number({min: undefined, max: undefined}), undefined]), next: faker.helpers.arrayElement([faker.helpers.arrayElement([faker.internet.url(), null]), undefined]), previous: faker.helpers.arrayElement([faker.helpers.arrayElement([faker.internet.url(), null]), undefined]), results: faker.helpers.arrayElement([Array.from({ length: faker.datatype.number({ min: 1, max: 10 }) }, (_, i) => i + 1).map(() => ({id: faker.datatype.number({min: undefined, max: undefined}), name: faker.random.word(), model: faker.random.word(), year: faker.datatype.number({min: -2147483648, max: 2147483647}), max_energy: faker.random.word(), current_energy: faker.random.word(), is_charging: faker.helpers.arrayElement([faker.datatype.boolean(), undefined]), is_active: faker.helpers.arrayElement([faker.datatype.boolean(), undefined]), owner: faker.datatype.number({min: undefined, max: undefined})})), undefined])})
 
@@ -123,11 +129,23 @@ ctx.json(getApiDjRestAuthUserPartialUpdateMock()),
           ctx.status(200, 'Mocked status'),
 ctx.json(getApiEnergyLogsListMock()),
         )
+      }),rest.post('*/api/energy-logs/upload_csv/', (_req, res, ctx) => {
+        return res(
+          ctx.delay(1000),
+          ctx.status(200, 'Mocked status'),
+ctx.json(getApiEnergyLogsUploadCsvCreateMock()),
+        )
       }),rest.get('*/api/schema/', (_req, res, ctx) => {
         return res(
           ctx.delay(1000),
           ctx.status(200, 'Mocked status'),
 ctx.json(getApiSchemaRetrieveMock()),
+        )
+      }),rest.get('*/api/user-car-charge-logs/', (_req, res, ctx) => {
+        return res(
+          ctx.delay(1000),
+          ctx.status(200, 'Mocked status'),
+ctx.json(getApiUserCarChargeLogsListMock()),
         )
       }),rest.get('*/api/user-cars/', (_req, res, ctx) => {
         return res(

@@ -48,5 +48,5 @@ class EnergyPriceLog(AbstractClient):
     class Meta:
         verbose_name = "Energy Price Log"
         verbose_name_plural = "Energy Price Logs"
-        ordering = ["price"]
-        unique_together = ["price"]
+        ordering = ["created_at"]
+        unique_together = ["price", "created_at"]

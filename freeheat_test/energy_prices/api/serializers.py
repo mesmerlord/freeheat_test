@@ -31,4 +31,4 @@ class UserCarDetailModelSerializer(serializers.ModelSerializer):
 class EnergyPriceLogModelSerializer(serializers.ModelSerializer):
     class Meta:
         model = EnergyPriceLog
-        exclude = ["created_at"]
+        exclude = ["updated_at"]

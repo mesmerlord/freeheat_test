@@ -1,8 +1,6 @@
-import { useStore } from "@/store";
 import { MantineProvider, Paper } from "@mantine/core";
 
-import { parseCookies } from "nookies";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 const Background = ({
   themeDefault,
