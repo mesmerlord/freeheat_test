@@ -1,7 +1,8 @@
 import {
+  getApiEnergyLogsListQueryKey,
   useApiEnergyLogsList,
   useApiEnergyLogsUploadCsvCreate,
-  useApiUserCarChargeLogsList,
+  useApiUserCarChargeLogsList
 } from "@/api/api";
 import { errorNotification } from "@/utils/error-notification";
 import {
@@ -16,6 +17,7 @@ import {
 } from "@mantine/core";
 import { showNotification } from "@mantine/notifications";
 import { UploadIcon } from "@radix-ui/react-icons";
+import { useQueryClient } from "@tanstack/react-query";
 import { useRef } from "react";
 import {
   CartesianGrid,
@@ -66,6 +68,8 @@ const ElectricityPage = () => {
     page: 1,
   });
 
+  const queryClient = useQueryClient();
+
   // Transform data for the graph
   const graphData = data?.results?.map((item) => ({
     date: `${new Date(item.created_at).toLocaleDateString()} ${new Date(
@@ -100,6 +104,10 @@ const ElectricityPage = () => {
               title: "File uploaded",
               message: "File uploaded successfully",
             });
+            queryClient.invalidateQueries(getApiEnergyLogsListQueryKey({
+              itemsPerPage: 1000,
+              page: 1,
+            }));
           },
           onError: (error) => {
             errorNotification(error);
