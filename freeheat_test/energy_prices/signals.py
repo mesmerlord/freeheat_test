@@ -18,4 +18,5 @@ def log_user_car_charging(sender, instance, **kwargs):
             logging.info(f"Logged charging status change for car: {instance.name}")
     except UserCar.DoesNotExist:
         # This is likely the car's first creation, so no need to log
+        logging.info(f"Car: {instance.name} is being created, no need to log charging status change")
         pass

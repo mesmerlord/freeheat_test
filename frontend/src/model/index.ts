@@ -32,5 +32,7 @@ export * from './registration';
 export * from './restAuthDetail';
 export * from './token';
 export * from './user';
+export * from './userCarChargeLogModel';
+export * from './userCarDetailModel';
 export * from './userCarModel';
 export * from './userDetails';

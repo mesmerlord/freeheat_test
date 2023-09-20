@@ -33,20 +33,20 @@ export const getApiDjRestAuthUserPartialUpdateMock = () => ({pk: faker.datatype.
 export const getApiEnergyLogsListMock = () => ({count: faker.helpers.arrayElement([faker.datatype.number({min: undefined, max: undefined}), undefined]), next: faker.helpers.arrayElement([faker.helpers.arrayElement([faker.internet.url(), null]), undefined]), previous: faker.helpers.arrayElement([faker.helpers.arrayElement([faker.internet.url(), null]), undefined]), results: faker.helpers.arrayElement([Array.from({ length: faker.datatype.number({ min: 1, max: 10 }) }, (_, i) => i + 1).map(() => ({id: faker.datatype.number({min: undefined, max: undefined}), updated_at: `${faker.date.past().toISOString().split('.')[0]}Z`, price: faker.random.word()})), undefined])})
 
 export const getApiSchemaRetrieveMock = () => (faker.helpers.arrayElement([{
-        'clmqlj6f10000nay1fq2jd0eq': {}
+        'clmrgi68j0000j0y1hyr82ue4': {}
       }, {
-        'clmqlj6f10001nay199c50fz8': {}
+        'clmrgi68j0001j0y18ozr3k8c': {}
       }, {
-        'clmqlj6f20002nay1d44y31wa': {}
+        'clmrgi68j0002j0y1ecdqhcwm': {}
       }, {
-        'clmqlj6f20003nay1a202255h': {}
+        'clmrgi68j0003j0y139gf5i18': {}
       }]))
 
 export const getApiUserCarsListMock = () => ({count: faker.helpers.arrayElement([faker.datatype.number({min: undefined, max: undefined}), undefined]), next: faker.helpers.arrayElement([faker.helpers.arrayElement([faker.internet.url(), null]), undefined]), previous: faker.helpers.arrayElement([faker.helpers.arrayElement([faker.internet.url(), null]), undefined]), results: faker.helpers.arrayElement([Array.from({ length: faker.datatype.number({ min: 1, max: 10 }) }, (_, i) => i + 1).map(() => ({id: faker.datatype.number({min: undefined, max: undefined}), name: faker.random.word(), model: faker.random.word(), year: faker.datatype.number({min: -2147483648, max: 2147483647}), max_energy: faker.random.word(), current_energy: faker.random.word(), is_charging: faker.helpers.arrayElement([faker.datatype.boolean(), undefined]), is_active: faker.helpers.arrayElement([faker.datatype.boolean(), undefined]), owner: faker.datatype.number({min: undefined, max: undefined})})), undefined])})
 
 export const getApiUserCarsCreateMock = () => ({id: faker.datatype.number({min: undefined, max: undefined}), name: faker.random.word(), model: faker.random.word(), year: faker.datatype.number({min: -2147483648, max: 2147483647}), max_energy: faker.random.word(), current_energy: faker.random.word(), is_charging: faker.helpers.arrayElement([faker.datatype.boolean(), undefined]), is_active: faker.helpers.arrayElement([faker.datatype.boolean(), undefined]), owner: faker.datatype.number({min: undefined, max: undefined})})
 
-export const getApiUserCarsRetrieveMock = () => ({id: faker.datatype.number({min: undefined, max: undefined}), name: faker.random.word(), model: faker.random.word(), year: faker.datatype.number({min: -2147483648, max: 2147483647}), max_energy: faker.random.word(), current_energy: faker.random.word(), is_charging: faker.helpers.arrayElement([faker.datatype.boolean(), undefined]), is_active: faker.helpers.arrayElement([faker.datatype.boolean(), undefined]), owner: faker.datatype.number({min: undefined, max: undefined})})
+export const getApiUserCarsRetrieveMock = () => ({id: faker.datatype.number({min: undefined, max: undefined}), user_car_charge_logs: Array.from({ length: faker.datatype.number({ min: 1, max: 10 }) }, (_, i) => i + 1).map(() => ({id: faker.datatype.number({min: undefined, max: undefined}), created_at: `${faker.date.past().toISOString().split('.')[0]}Z`, energy: faker.random.word(), is_charging: faker.helpers.arrayElement([faker.datatype.boolean(), undefined]), user_car: faker.datatype.number({min: undefined, max: undefined})})), created_at: `${faker.date.past().toISOString().split('.')[0]}Z`, updated_at: `${faker.date.past().toISOString().split('.')[0]}Z`, name: faker.random.word(), model: faker.random.word(), year: faker.datatype.number({min: -2147483648, max: 2147483647}), max_energy: faker.random.word(), current_energy: faker.random.word(), is_charging: faker.helpers.arrayElement([faker.datatype.boolean(), undefined]), is_active: faker.helpers.arrayElement([faker.datatype.boolean(), undefined]), owner: faker.datatype.number({min: undefined, max: undefined})})
 
 export const getApiUserCarsUpdateMock = () => ({id: faker.datatype.number({min: undefined, max: undefined}), name: faker.random.word(), model: faker.random.word(), year: faker.datatype.number({min: -2147483648, max: 2147483647}), max_energy: faker.random.word(), current_energy: faker.random.word(), is_charging: faker.helpers.arrayElement([faker.datatype.boolean(), undefined]), is_active: faker.helpers.arrayElement([faker.datatype.boolean(), undefined]), owner: faker.datatype.number({min: undefined, max: undefined})})
 

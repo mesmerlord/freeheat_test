@@ -40,6 +40,7 @@ import type {
   PaginatedUserCarModelList,
   ApiUserCarsListParams,
   UserCarModel,
+  UserCarDetailModel,
   PatchedUserCarModel,
   PaginatedUserList,
   ApiUsersListParams,
@@ -882,7 +883,7 @@ export const getApiUserCarsCreateMutationOptions = <TError = unknown,
     id: number,
  options?: SecondParameter<typeof axiosInstance>,signal?: AbortSignal
 ) => {
-      return axiosInstance<UserCarModel>(
+      return axiosInstance<UserCarDetailModel>(
       {url: `/api/user-cars/${id}/`, method: 'get', signal
     },
       options);

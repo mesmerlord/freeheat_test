@@ -37,7 +37,6 @@ class UserCarChargeLog(AbstractClient):
         verbose_name = "User Car Horuly Charge Log"
         verbose_name_plural = "User Car Charge Logs"
         ordering = ["user_car"]
-        unique_together = ("user_car", "energy", "is_charging")
 
 
 class EnergyPriceLog(AbstractClient):

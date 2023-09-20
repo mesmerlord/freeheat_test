@@ -323,18 +323,16 @@ const CustomAppShell = ({ children }: { children: React.ReactNode }) => {
         </Header>
       }
       navbar={
-        !meData?.username ? (
-          <></>
-        ) : (
+        !meData?.username ? undefined : (
           <Navbar
-            width={{ base: 300 }}
+            width={{ base: 0, md: 300 }}
             height={500}
             p={0}
             color="blue"
             hiddenBreakpoint="md"
             hidden={true}
           >
-            <Navbar.Section>
+            <Navbar.Section p={10}>
               <NavLink
                 active={false}
                 component={Link}
